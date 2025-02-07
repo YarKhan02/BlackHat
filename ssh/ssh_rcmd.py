@@ -8,7 +8,7 @@ def ssh_command(ip, port, user, password, command):
     client.connect(ip, port = port, username = user, password = password)
 
     ssh_session = client.get_transport().open_session()
-    if ssh_sessio.active():
+    if ssh_session.active():
         ssh_session.send(command)
         print(ssh_session.recv(1024).decode())
 
@@ -24,7 +24,6 @@ def ssh_command(ip, port, user, password, command):
             except Exception as e:
                 ssh_session.send(str(e))
         client.close()
-        break
     return
 
 if __name__ == '__main__':

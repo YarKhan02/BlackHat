@@ -1,11 +1,12 @@
 import paramiko
 import shlex
 import subprocess
+import getpass
 
 def ssh_command(ip, port, user, password, command):
     client = paramiko.SSHClient()
-    client.set_missing_host_key_polict(paramiko.AutoAddPolicy())
-    client.connect(ip, port = port, username = user, password = password)
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    client.connect(ip, port=port, username=user, password=password)
 
     ssh_session = client.get_transport().open_session()
     if ssh_session.active():
@@ -27,7 +28,6 @@ def ssh_command(ip, port, user, password, command):
     return
 
 if __name__ == '__main__':
-    import getpass
     user = getpass.getuser()
     password = getpass.getpass()
 
